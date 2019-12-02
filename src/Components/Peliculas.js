@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FormattedDate } from 'react-intl';
 import { FormattedNumber } from "react-intl";
+import {FormattedPlural} from 'react-intl';
+
 
 export default class Peliculas extends React.Component {
     constructor(props) {
@@ -71,7 +73,14 @@ export default class Peliculas extends React.Component {
                     <td>{item.name}</td>
                     <td>{item.directedBy}</td>
                     <td>{item.country}</td>
-                    <td>{item.budget}</td>
+                    <td>
+                        <FormattedPlural 
+                        value = {item.budget}
+                        one = "Million"
+                        other ="Millions"
+                        />
+                        {item.budget}
+                    </td>
                     <td>
                         <FormattedDate
                             value={new Date(item.releaseDate)}
@@ -96,12 +105,12 @@ export default class Peliculas extends React.Component {
                     <td>{item.directedBy}</td>
                     <td>{item.country}</td>
                     <td>
-                        {item.budget}
-                        <FormattedMessage
-                            value={item.budget}
-                            one="million"
-                            other="millions"
+                        <FormattedPlural 
+                        value = {item.budget}
+                        one = "Millón"
+                        other ="Millones"
                         />
+                        {item.budget}
                     </td>
                     <td>
                         <FormattedDate
@@ -112,7 +121,11 @@ export default class Peliculas extends React.Component {
                             weekday='long'
                         />
                     </td>
-                    <td>{item.views}</td>
+                    <td>
+                        <FormattedNumber
+                            value={item.views}
+                        />
+                    </td>
                 </tr>
             );
         }

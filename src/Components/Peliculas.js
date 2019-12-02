@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import Detail from './Detail.js';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { FormattedDate } from 'react-intl';
+import { FormattedNumber } from "react-intl";
 
 export default class Peliculas extends React.Component {
     constructor(props) {
@@ -21,14 +23,14 @@ export default class Peliculas extends React.Component {
             if (localStorage.getItem('peliculasEs') === null)
                 this.setState({ peliculasEs: "loading..." })
             else
-                this.setState({ peliculasEs: JSON.parse(localStorage.getItem('peliculasEs') )});
+                this.setState({ peliculasEs: JSON.parse(localStorage.getItem('peliculasEs')) });
         }
 
         if (!navigator.onLine) {
             if (localStorage.getItem('peliculasEn') === null)
                 this.setState({ peliculasEn: "loading..." })
             else
-                this.setState({ peliculasEn:  JSON.parse(localStorage.getItem('peliculasEn'))});
+                this.setState({ peliculasEn: JSON.parse(localStorage.getItem('peliculasEn')) });
         }
 
         fetch("https://gist.githubusercontent.com/josejbocanegra/f784b189117d214578ac2358eb0a01d7/raw/2b22960c3f203bdf4fac44cc7e3849689218b8c0/data-es.json")
@@ -63,15 +65,27 @@ export default class Peliculas extends React.Component {
         let items = []
         console.log(navigator.language)
         if (navigator.language === "en-US") {
-            
+
             items = this.state.peliculasEn.map((item, key) =>
                 <tr onClick={() => this.handleClick(item.id)}>
                     <td>{item.name}</td>
                     <td>{item.directedBy}</td>
                     <td>{item.country}</td>
                     <td>{item.budget}</td>
-                    <td>{item.releaseDate}</td>
-                    <td>{item.views}</td>
+                    <td>
+                        <FormattedDate
+                            value={new Date(item.releaseDate)}
+                            year='numeric'
+                            month='long'
+                            day='numeric'
+                            weekday='long'
+                        />
+                    </td>
+                    <td>
+                        <FormattedNumber
+                            value={item.views}
+                        />
+                    </td>
                 </tr>
             );
         }
@@ -82,14 +96,22 @@ export default class Peliculas extends React.Component {
                     <td>{item.directedBy}</td>
                     <td>{item.country}</td>
                     <td>
-                        {item.budget} 
-                        <FormattedMessage 
-                        value={item.budget}
-                        one="million"
-                        other= "millions"
+                        {item.budget}
+                        <FormattedMessage
+                            value={item.budget}
+                            one="million"
+                            other="millions"
                         />
                     </td>
-                    <td>{item.releaseDate}</td>
+                    <td>
+                        <FormattedDate
+                            value={new Date(item.releaseDate)}
+                            year='numeric'
+                            month='long'
+                            day='numeric'
+                            weekday='long'
+                        />
+                    </td>
                     <td>{item.views}</td>
                 </tr>
             );

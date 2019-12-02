@@ -1,0 +1,12 @@
+{
+    "name": "Name",
+    "movies": "Movies",
+    "directedBy": "Directed by",
+    "country": "Country",
+    "description": "Description",
+    "cast": "Cast",
+    "poster": "Poster",
+    "releaseDate": "Release date",
+    "views": "Views",
+    "budget": "Budget"
+}

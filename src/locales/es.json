@@ -1,0 +1,12 @@
+{
+    "name": "Nombre",
+    "movies": "Películas",
+    "directedBy": "Dirigida por:",
+    "country": "País",
+    "description": "Descripción",
+    "cast": "Elenco",
+    "poster": "Cartelera",
+    "releaseDate": "Fecha de estreno",
+    "views": "Vistas",
+    "budget": "Presupuesto"
+}
